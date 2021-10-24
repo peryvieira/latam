@@ -1,17 +1,16 @@
 package com.airlines.latam.controller;
 
+import com.airlines.latam.dto.ClienteDTO;
+import com.airlines.latam.exception.ClienteNotFoundException;
 import com.airlines.latam.model.Cliente;
 import com.airlines.latam.service.impl.ClienteServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("cliente")
+@RequestMapping("v1/cliente")
 public class ClienteController {
     private final ClienteServiceImpl clienteService;
 
@@ -20,8 +19,18 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Cliente>> getClienteById(@PathVariable Long id){
-        return ResponseEntity.ok().body(clienteService.findById(id));
+    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) throws ClienteNotFoundException {
 
+
+        return ResponseEntity.ok().body(clienteService.findById(id).orElseThrow(() -> new ClienteNotFoundException("teste")));
+    }
+
+    @PostMapping
+    public ResponseEntity<Cliente> postCliente(@RequestBody @Valid ClienteDTO clienteDTO){
+        Cliente cliente = Cliente.builder()
+                .nome(clienteDTO.getNome())
+                .cpf(clienteDTO.getCpf()).build();
+
+        return ResponseEntity.ok().body(clienteService.save(cliente));
     }
 }
