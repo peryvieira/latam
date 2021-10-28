@@ -20,9 +20,7 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) throws ClienteNotFoundException {
-
-
-        return ResponseEntity.ok().body(clienteService.findById(id).orElseThrow(() -> new ClienteNotFoundException("teste")));
+        return ResponseEntity.ok().body(clienteService.findById(id).orElseThrow(() -> new ClienteNotFoundException(id.toString())));
     }
 
     @PostMapping
