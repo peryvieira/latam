@@ -1,14 +1,11 @@
 package com.airlines.latam.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import com.airlines.latam.model.Aeroporto;
-import com.airlines.latam.model.Aviao;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 public class Voo {
 
     @Id
@@ -23,7 +21,7 @@ public class Voo {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "aviao_id", nullable = false)
+    @JoinColumn(name = "aviao_id", nullable = false, referencedColumnName = "id")
     private Aviao aviao;
 
     @OneToOne
@@ -34,9 +32,10 @@ public class Voo {
     @JoinColumn(name = "aeroporto_chegada_id", nullable = false)
     private Aeroporto chegada;
 
-    private LocalDate dataPartida;
-    private LocalDate dataChegada;
-    private Integer quantidadeClientes;
-    private BigDecimal pesoCarga;
-    private BigDecimal valorViagem;
+    private LocalDate data_partida;
+    private LocalDate data_chegada;
+    private Integer quantidade_clientes;
+    private BigDecimal peso_carga;
+    private BigDecimal valor_viagem;
+
 }

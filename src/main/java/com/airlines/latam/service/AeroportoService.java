@@ -12,6 +12,8 @@ public interface AeroportoService   {
 
     Optional<Aeroporto> findByCidade(String cidade);
 
+    Optional<Aeroporto> findBySigla(String sigla);
+
     Aeroporto save(Aeroporto aeroporto);
 
     void deleteById(Long id);

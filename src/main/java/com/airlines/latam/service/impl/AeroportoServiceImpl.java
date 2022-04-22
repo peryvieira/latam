@@ -33,6 +33,11 @@ public class AeroportoServiceImpl implements AeroportoService {
     }
 
     @Override
+    public Optional<Aeroporto> findBySigla(String sigla) {
+        return aeroportoRepository.findBySigla(sigla);
+    }
+
+    @Override
     public Aeroporto save(Aeroporto aeroporto) {
         return aeroportoRepository.save(aeroporto);
     }

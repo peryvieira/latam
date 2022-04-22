@@ -21,5 +21,5 @@ public class Aeroporto {
     private String nome;
     private String cidade;
     private String estado;
-    private String pais;
+    private String sigla;
 }

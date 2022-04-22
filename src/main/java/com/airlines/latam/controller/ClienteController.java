@@ -24,7 +24,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> postCliente(@RequestBody @Valid ClienteDTO clienteDTO){
+    public ResponseEntity<Cliente> createCliente(@RequestBody @Valid ClienteDTO clienteDTO){
         Cliente cliente = Cliente.builder()
                 .nome(clienteDTO.getNome())
                 .cpf(clienteDTO.getCpf()).build();
